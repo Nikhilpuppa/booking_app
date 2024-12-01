@@ -27,18 +27,19 @@ pipeline {
                 sh 'docker build -t backend-image .'
             }}
         }
-        // stage('Push to Docker Hub') {
-        //     steps {
-        //         script {
-        //                 // sh "docker login --username bean6792 --password Vivek@1383"
-        //                 // sh 'docker tag frontend-image bean6792/frontend-image:latest'
-        //                 // sh 'docker push bean6792/frontend-image:latest'
-        //                 // sh "docker tag backend-image bean6792/backend-image:latest"
-        //                 // sh "docker push bean6792/backend-image:latest"
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                        sh "docker login --username chandranikhil --password Nikhil@1203"
+                        sh 'docker tag frontend-image chandranikhil/frontend-image:latest'
+                        sh 'docker push chandranikhil/frontend-image:latest'
+                        sh "docker tag backend-image chandranikhil/backend-image:latest"
+                        sh "docker push chandranikhil/backend-image:latest"
                     
-        //         }
-        //     }
-        // }
+                }
+            }
+        }
+        
         // stage('Ansible Deployment') {
         //     steps {
         //         script { 
