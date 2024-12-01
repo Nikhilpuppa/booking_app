@@ -1,4 +1,4 @@
-import PhotosUploader from "../Photosuploader";
+import PhotosUploader from "../PhotosUploader";
 import Perks from "../Perks";
 import {useEffect, useState} from "react";
 import AccountNav from "../AccountNav";

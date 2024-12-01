@@ -198,20 +198,34 @@ app.get('/places',async(req,res) => {
     res.json(await Place.find());
 })
 
-app.post('/bookings', async(req, res)=>{
-    const userData=await getUserDataFromReq(req);
-    const {
-        place,checkIn,checkOut,numberOfGuests,name,phone,price
-    }= req.body;
+app.post('/bookings', async (req, res) => {
+    const userData = await getUserDataFromReq(req);
+    const { place, checkIn, checkOut, numberOfGuests, name, phone, price } = req.body;
+
+    // Check if all required parameters are provided
+    if (!place || !checkIn || !checkOut || !numberOfGuests || !name || !phone || !price) {
+        return res.status(400).json({ message: "Please fill in all required fields." });
+    }
+
     Booking.create({
-        place,checkIn,checkOut,numberOfGuests,name,phone,price,
-        user:userData.id,
-    }).then((doc) => {
+        place,
+        checkIn,
+        checkOut,
+        numberOfGuests,
+        name,
+        phone,
+        price,
+        user: userData.id,
+    })
+    .then((doc) => {
         res.json(doc);
-    }).catch((err) => {
-        throw err;
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).json({ message: "An error occurred while creating the booking." });
     });
-})
+});
+
 
 app.get('/bookings', async(req,res)=>{
     const userData=await getUserDataFromReq(req);
