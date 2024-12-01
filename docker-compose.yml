@@ -1,22 +1,16 @@
 version: '3'
 services:
-  container1:
-    image: frontend-image
+  frontend:
+    image: chandranikhil/frontend-image:latest
+    restart: always
     ports:
-      - "5173:5173"
-    networks:
-      - mynetwork
-    depends_on:
-      - container2
-
-  container2:
-    image: backend-image
+      - '5173:5173'
+    command: yarn run dev --host
+  backend:
+    image: chandranikhil/backend-image:latest
+    restart: always
     ports:
-      - "4000:4000"
-    networks:
-      - mynetwork
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-
-networks:
-  mynetwork:
+      - '4000:4000'
+    environment:
+      - mongo_url = "mongodb+srv://nikhilpuppala03:Buncuski2BlCmygA@cluster0.6z92y.mongodb.net/"
+      - jwtSecret = "ewrgfrtyjnyujtrtgyret"
