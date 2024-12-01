@@ -22,7 +22,7 @@ pipeline {
         }
         stage("Server build") {
             steps {
-                dir('server'){
+                dir('api'){
                 sh "npm install"
                 sh 'docker build -t backend-image .'
             }}
