@@ -11,4 +11,4 @@
         dest: "docker-compose.yml"
 
     - name: Run Docker Compose
-      command: docker-compose up -d
+      command: docker compose up -d
