@@ -4,6 +4,7 @@ metadata:
   name: backend-service
   namespace: mern-app
 spec:
+  type: NodePort
   selector:
     app: backend
   ports:
