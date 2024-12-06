@@ -23,9 +23,8 @@ app.use(cookieParser());
 const corsOptions = {
     origin: (origin, callback) => {
       if (
-        origin === 'http://localhost:3000' || // Frontend on localhost
-        origin === 'http://127.0.0.1:4000' || // Localhost in Docker or other setups
-        origin === 'http://192.168.49.2:31806'  // External IP in Kubernetes or other network setups
+        origin === 'http://localhost:5173' || // Allow localhost for dev purposes
+        origin === 'http://192.168.80.3:5173'  // Allow requests from your external IP
       ) {
         callback(null, true); // Allow the request
       } else {
@@ -34,6 +33,8 @@ const corsOptions = {
     },
     credentials: true, // This enables sending cookies with requests
   };
+  
+  app.use(cors(corsOptions));
   
   app.use(cors(corsOptions));
 
