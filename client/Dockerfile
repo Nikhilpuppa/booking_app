@@ -15,4 +15,4 @@ COPY . /app
 EXPOSE 5173
 
 # Run the frontend development server and bind to 0.0.0.0
-CMD ["yarn", "run", "dev", "--host"]
+# CMD ["yarn", "run", "dev", "--host"]
