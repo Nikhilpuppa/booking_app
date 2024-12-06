@@ -3,16 +3,16 @@ FROM node:21
 # Create app directory
 WORKDIR /app
 
-# Install app dependencies
+# Install dependencies
 COPY ./package.json /app
 COPY ./yarn.lock /app
-
 RUN yarn install
-# If you are building your code for production
-# RUN yarn install --production
 
 # Bundle app source
 COPY . /app
 
+# Expose the application port
 EXPOSE 5173
-CMD [ "yarn", "dev" ]
+
+# Run the frontend development server and bind to 0.0.0.0
+CMD ["yarn", "run", "dev", "--host"]
