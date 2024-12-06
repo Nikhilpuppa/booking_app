@@ -14,5 +14,5 @@ COPY . /app
 # Expose the application port
 EXPOSE 5173
 
-# Run the frontend development server and bind to 0.0.0.0
-# CMD ["yarn", "run", "dev", "--host"]
+# Set the default command to start the frontend development server
+CMD ["yarn", "dev"]
