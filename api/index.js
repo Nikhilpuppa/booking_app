@@ -20,10 +20,22 @@ app.use('/uploads',express.static(__dirname+'/uploads'));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors({
-    credentials: true,
-    origin: 'http://localhost:5173',
-}));
+const corsOptions = {
+    origin: (origin, callback) => {
+      if (
+        origin === 'http://localhost:3000' || // Frontend on localhost
+        origin === 'http://127.0.0.1:4000' || // Localhost in Docker or other setups
+        origin === 'http://192.168.49.2:31806'  // External IP in Kubernetes or other network setups
+      ) {
+        callback(null, true); // Allow the request
+      } else {
+        callback(new Error('Not allowed by CORS')); // Reject the request
+      }
+    },
+    credentials: true, // This enables sending cookies with requests
+  };
+  
+  app.use(cors(corsOptions));
 
 console.log(process.env.MONGO_URL)
 mongoose.connect(process.env.MONGO_URL);
