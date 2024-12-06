@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  namespace: mern-app
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: chandranikhil/backend-image:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - name: http
+          containerPort: 4000
+        env: 
+        - name: MONGO
+          valueFrom:
+            secretKeyRef:
+              name: mern-backend-secret
+              key: mongo_url 
+        - name: JWT
+          valueFrom:
+            secretKeyRef:
+              name: mern-backend-secret
+              key: jwt_secret
