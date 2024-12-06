@@ -19,7 +19,7 @@ import BookingPage from './pages/BookingPage'
 
 axios.defaults.baseURL = window.location.hostname === 'localhost' ? 
   'http://127.0.0.1:4000' : 
-  'http://192.168.49.2:31806';
+  'http://192.168.49.2:30001';
 
 
 axios.defaults.withCredentials = true;
