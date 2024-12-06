@@ -23,9 +23,13 @@ app.use(cookieParser());
 
 
 app.use(cors({
-  credentials: true, // Allow cookies to be sent with requests
-  origin: 'http://localhost:5173', // Allow only the frontend URL
-}));
+    credentials: true, // Allow cookies to be sent with requests
+    origin: [
+      'http://localhost:5173',  // Allow the frontend URL
+      'http://192.168.99.100:3000'  // Allow Minikube IP with port 30001
+    ],
+  }));
+  
 
 
 
