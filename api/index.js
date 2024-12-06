@@ -20,10 +20,14 @@ app.use('/uploads',express.static(__dirname+'/uploads'));
 app.use(express.json());
 app.use(cookieParser());
 
+
+
 app.use(cors({
-    credentials: true,
-    origin: 'http://localhost:5173',
+  credentials: true, // Allow cookies to be sent with requests
+  origin: 'http://localhost:5173', // Allow only the frontend URL
 }));
+
+
 
 console.log(process.env.MONGO_URL)
 mongoose.connect(process.env.MONGO_URL);
@@ -143,6 +147,7 @@ app.post('/upload', photosMiddleWare.array('photos', 100), (req, res) => {
 
 
 app.post('/places',(req,res) => {
+    console.log("hi");
     const {token} = req.cookies;
     const {
         title,address,addedPhotos,description,
@@ -195,6 +200,7 @@ app.put('/places',async(req,res) => {
 })
 
 app.get('/places',async(req,res) => {
+    console.log("dg");
     res.json(await Place.find());
 })
 
