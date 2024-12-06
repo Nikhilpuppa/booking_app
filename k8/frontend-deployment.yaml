@@ -18,3 +18,4 @@ spec:
           image: chandranikhil/frontend-image:latest
           ports:
             - containerPort: 5173
+          command: ["yarn", "run", "dev", "--host"]

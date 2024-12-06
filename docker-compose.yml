@@ -5,7 +5,7 @@ services:
     restart: always
     ports:
       - '5173:5173'
-    # command: yarn run dev --host
+    command: yarn run dev --host
   backend:
     image: chandranikhil/backend-image:latest
     restart: always
