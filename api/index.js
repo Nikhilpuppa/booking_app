@@ -245,4 +245,6 @@ app.get('/bookings', async(req,res)=>{
 })
 
 
-app.listen(4000);
+app.listen(4000, '0.0.0.0', () => {
+    console.log('Server is running on http://0.0.0.0:4000 and accessible from Minikube IP');
+  });
