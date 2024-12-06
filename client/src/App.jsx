@@ -16,13 +16,13 @@ import BookingPage from './pages/BookingPage'
 // axios.defaults.baseURL = 'http://127.0.0.1:4000'; 
 // axios.defaults.withCredentials = true;
 
-// axios.defaults.baseURL = 'http://192.168.49.2:30001'; 
-// axios.defaults.withCredentials = true;
+axios.defaults.baseURL = 'http://192.168.49.2:30001'; 
+axios.defaults.withCredentials = true;
 
 
-axios.defaults.baseURL = window.location.hostname === 'localhost' ? 
-  'http://127.0.0.1:4000' : 
-  'http://192.168.49.2:30001';
+// axios.defaults.baseURL = window.location.hostname === 'localhost' ? 
+//   'http://127.0.0.1:4000' : 
+//   'http://192.168.49.2:30001';
 
 
 // axios.defaults.withCredentials = true;
