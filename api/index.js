@@ -20,22 +20,10 @@ app.use('/uploads',express.static(__dirname+'/uploads'));
 app.use(express.json());
 app.use(cookieParser());
 
-const corsOptions = {
-    origin: (origin, callback) => {
-      if (
-        origin === 'http://localhost:3000' || // Frontend on localhost
-        origin === 'http://127.0.0.1:4000' || // Localhost in Docker or other setups
-        origin === 'http://192.168.49.2:31806'  // External IP in Kubernetes or other network setups
-      ) {
-        callback(null, true); // Allow the request
-      } else {
-        callback(new Error('Not allowed by CORS')); // Reject the request
-      }
-    },
-    credentials: true, // This enables sending cookies with requests
-  };
-  
-  app.use(cors(corsOptions));
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:5173',
+}));
 
 console.log(process.env.MONGO_URL)
 mongoose.connect(process.env.MONGO_URL);
@@ -247,13 +235,4 @@ app.get('/bookings', async(req,res)=>{
 })
 
 
-const host = process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost'
-  ? '127.0.0.1'  // Localhost for local development
-  : '0.0.0.0';    // Listen on all network interfaces for external access (e.g., Kubernetes)
-
-const port = process.env.PORT || 4000; // Use the port from environment variables or fallback to 4000
-
-// Listen on the chosen host and port
-app.listen(port, host, () => {
-  console.log(`Server running on http://${host}:${port}`);
-});
+app.listen(4000);
