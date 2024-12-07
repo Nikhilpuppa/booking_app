@@ -1,16 +1,21 @@
 version: '3'
 services:
   frontend:
-    image: chandranikhil/frontend-image:latest
+    build:
+      context: ./client   # Path to your frontend Dockerfile
+      # dockerfile: Dockerfile  # Optional if the Dockerfile name is not standard
     restart: always
     ports:
       - '5173:5173'
     command: yarn run dev --host
+
   backend:
-    image: chandranikhil/backend-image:latest
+    build:
+      context: ./api  # Path to your backend Dockerfile
+      # dockerfile: Dockerfile  # Optional if the Dockerfile name is not standard
     restart: always
     ports:
       - '4000:4000'
     environment:
-      - mongo_url = "mongodb+srv://nikhilpuppala03:Buncuski2BlCmygA@cluster0.6z92y.mongodb.net/"
-      - jwtSecret = "ewrgfrtyjnyujtrtgyret"
+      - mongo_url=mongodb+srv://nikhilpuppala03:Buncuski2BlCmygA@cluster0.6z92y.mongodb.net/
+      - jwtSecret=ewrgfrtyjnyujtrtgyret
