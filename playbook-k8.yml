@@ -2,15 +2,16 @@
 - name: Deploying with Kubernetes
   hosts: all
   tasks:
-    - name: install pre-requisites
+    - name: Install pre-requisites
       pip:
         name:
           - openshift
           - pyyaml
-          - kubernetes 
-          
+          - kubernetes
+
     - name: Create Namespace
       kubernetes.core.k8s:
+        kubeconfig: /var/lib/jenkins/.kube/config
         state: present
         definition:
           apiVersion: v1

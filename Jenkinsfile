@@ -3,7 +3,7 @@ pipeline {
     environment {
         mongo_url = "mongodb+srv://nikhilpuppala03:Buncuski2BlCmygA@cluster0.6z92y.mongodb.net/"
         jwtSecret = "ewrgfrtyjnyujtrtgyret"
-
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
     }
     stages {
         stage('Stage 1: Git Clone') {
