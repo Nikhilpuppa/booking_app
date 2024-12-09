@@ -9,6 +9,6 @@ spec:
     app: frontend
   ports:
   - name: http
-    port: 5173
-    targetPort: 5173
-    nodePort: 30000
+    port: 5173          # Service's port
+    targetPort: 5173    # Pod's port
+    nodePort: 30000     # Exposed NodePort

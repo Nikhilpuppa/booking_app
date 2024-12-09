@@ -43,7 +43,7 @@ pipeline {
         stage('Docker-Compose Deployment') {
             steps {
                 script { 
-                    sh 'ansible-playbook -i inventory playbook.yml -vvv'
+                    sh 'ansible-playbook -i inventory-k8 playbook-k8.yml -vvv'
                 }
             }
         }

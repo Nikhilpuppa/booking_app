@@ -23,15 +23,41 @@ export default function BookingWidget({place}){
     if(checkIn && checkOut){
         numberOfNights=differenceInCalendarDays(new Date(checkOut),new Date(checkIn));
     }
-    async function bookThisPlace(){
-        const response=await axios.post('/bookings',{
-            checkIn,checkOut,numberOfGuests,name,phone,
-            place:place._id,
-            price:numberOfNights*place.price,
-        });
-        const bookingId=response.data._id;
-        setRedirect(`/account/bookings/${bookingId}`)
+    async function bookThisPlace() {
+        try {
+            // Send the booking request to the server
+            const response = await axios.post(
+                '/bookings',
+                {
+                    checkIn,
+                    checkOut,
+                    numberOfGuests,
+                    name,
+                    phone,
+                    place: place._id,
+                    price: numberOfNights * place.price,
+                },
+                { withCredentials: true } // Ensure cookies are sent with the request
+            );
+    
+            // Extract booking ID from the response
+            const bookingId = response.data._id;
+    
+            if (bookingId) {
+                // Redirect to the booking details page
+                setRedirect(`/account/bookings/${bookingId}`);
+            } else {
+                console.error('Booking ID not received in response:', response.data);
+            }
+        } catch (error) {
+            // Log the error for debugging
+            console.error('Error while booking the place:', error);
+    
+            // Display an alert or handle the error in the UI
+            alert('There was an issue with the booking. Please try again later.');
+        }
     }
+    
     if(redirect){
         return <Navigate to={redirect}/>
     }

@@ -9,6 +9,6 @@ spec:
     app: backend
   ports:
     - name: http
-      port: 4000
-      targetPort: 4000
-      nodePort: 30001
+      port: 4000        # Service's port
+      targetPort: 4000  # Pod's port
+      nodePort: 30001   # Exposed NodePort

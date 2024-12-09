@@ -17,8 +17,15 @@ export default function IndexPage(){
             <Link to={'/place/' +place._id}>
                 <div className="bg-gray-500 mb-2 rounded-2xl flex">
                 {place.photos?.[0] && (
-                    <img className="rounded-2xl object-cover aspect-square" src={'http://localhost:4000/uploads/' + place.photos?.[0]} alt=""/>
-                )}
+    <img 
+        className="rounded-2xl object-cover aspect-square" 
+        src={`${window.location.hostname === 'localhost' 
+            ? 'http://localhost:4000/uploads/' 
+            : 'http://192.168.49.2:30001/uploads/'}${place.photos?.[0]}`} 
+        alt=""
+    />
+)}
+
                 </div>
                 <h2 className="font-bold">{place.title}</h2>
                 <h3 className="text-sm text-gray-500">{place.address}</h3>

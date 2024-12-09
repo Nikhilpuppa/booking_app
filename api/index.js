@@ -23,13 +23,14 @@ app.use(cookieParser());
 
 
 app.use(cors({
-    credentials: true, // Allow cookies to be sent with requests
+    credentials: true,
     origin: [
-      'http://localhost:5173',  // Allow the frontend URL
-      'http://192.168.49.2:30000'
-    //   'http://192.168.49.2:30001'// Allow Minikube IP with port 30000
+        'http://localhost:5173', 
+        'http://192.168.49.2:30000', // Minikube IP and frontend port
+        'http://192.168.49.2:30001' // Backend NodePort
     ],
-  }));
+}));
+
   
 
 
@@ -83,9 +84,9 @@ app.post('/login', async (req, res) => {
             jwt.sign({email:userDoc.email,id:userDoc.id},jwtSecret,{},(err,token) => {
                 if(err) throw err;
                 res.cookie('token', token, {
-                    httpOnly: true,   // Protects against XSS
-                    secure: true,     // Ensures cookies are sent over HTTPS (use `false` for local dev)
-                    sameSite: 'none', // Enables cross-origin cookies
+                    httpOnly: true,            // Protect from client-side access
+                    secure: false,             // Allow non-HTTPS for local testing
+                    sameSite: 'lax',           // Works with same-origin requests
                 }).json(userDoc);
                 
             })
@@ -210,6 +211,7 @@ app.get('/places',async(req,res) => {
 })
 
 app.post('/bookings', async (req, res) => {
+    // console.log(req)
     const userData = await getUserDataFromReq(req);
     const { place, checkIn, checkOut, numberOfGuests, name, phone, price } = req.body;
 
