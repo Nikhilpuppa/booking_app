@@ -19,4 +19,4 @@ services:
       - jwtSecret=ewrgfrtyjnyujtrtgyret
     volumes:
       - ./api/logs:/app/logs # Mount the logs folder from the host to the container
-    command: nodemon index.js  # Make sure this points to your main backend entry point, if different
+    # command: nodemon index.js  # Make sure this points to your main backend entry point, if different
