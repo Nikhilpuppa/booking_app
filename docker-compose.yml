@@ -2,8 +2,7 @@ version: '3'
 services:
   frontend:
     build:
-      context: ./client   # Path to your frontend Dockerfile
-      # dockerfile: Dockerfile  # Optional if the Dockerfile name is not standard
+      context: ./client  # Path to your frontend Dockerfile
     restart: always
     ports:
       - '5173:5173'
@@ -12,10 +11,12 @@ services:
   backend:
     build:
       context: ./api  # Path to your backend Dockerfile
-      # dockerfile: Dockerfile  # Optional if the Dockerfile name is not standard
     restart: always
     ports:
       - '4000:4000'
     environment:
       - mongo_url=mongodb+srv://nikhilpuppala03:Buncuski2BlCmygA@cluster0.6z92y.mongodb.net/
       - jwtSecret=ewrgfrtyjnyujtrtgyret
+    volumes:
+      - ./api/logs:/app/logs # Mount the logs folder from the host to the container
+    command: nodemon index.js  # Make sure this points to your main backend entry point, if different
